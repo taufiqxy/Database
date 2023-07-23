@@ -1,0 +1,38 @@
+# Create the SELECT statement that returns the customer last name and a mailing address.
+SELECT last_name, address FROM f_customers;
+
+# statements correction, E stands for Erorr and C stands for Correct
+E = SELECT first name FROM f_staffs;
+C = SELECT first_name FROM f_staffs;
+E = SELECT first_name |" " | last_name AS "DJs on Demand Clients" FROM d_clients
+C = SELECT first_name || ' ' || last_name AS "DJs on Demand Clients" FROM d_clients;
+E = SELECT DISCTINCT f_order_lines FROM quantity;
+C = SELECT DISTINCT quantity FROM f_order_lines;
+E = SELECT order number FROM f_orders;
+C = SELECT order_number FROM f_orders;
+
+# SELECT statement to display the results as shown in the Super Star chart.
+SELECT '*** ' || first_name || ' *** ' || first_name || ' ***' FROM f_staffs;
+
+# distinct
+SELECT distinct birthdate, first_name FROM f_staffs;
+
+# report raise salary
+SELECT last_name AS "employee last name", salary AS "current salary", salary+(salary*0.05) AS "salary with 5% raise" FROM f_staffs;
+
+# describe table
+DESC employees;
+DESCRIBE employees;
+
+# CD report
+SELECT cd_number AS "Inventory Item", title AS "CD Title", producer AS "Music Producer", year AS "Year Purchased" FROM D_CDs;
+
+# Employee Salary
+SELECT last_name, job_id, salary AS Sal FROM employees;
+
+# job grade
+SELECT * FROM job_grades;
+
+# coding error
+E = SELECT employee_id, last_name sal x 12 ANNUAL SALARY FROM employees;
+C = SELECT employee_id, last_name, salary*12 "ANNUAL SALARY" FROM employees;
