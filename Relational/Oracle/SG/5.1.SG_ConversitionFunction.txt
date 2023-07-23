@@ -1,0 +1,30 @@
+# Date Conversion to Char Data
+SELECT TO_CHAR(hire_date, 'Month dd, YYYY') FROM employees;
+SELECT TO_CHAR(hire_date, 'fmMonth dd, YYYY') FROM employees;
+SELECT TO_CHAR(hire_date, 'Month ddth, YYYY') FROM employees;
+SELECT TO_CHAR(hire_date, 'fmDay ddth Mon, YYYY') FROM employees;
+SELECT TO_CHAR(hire_date, 'fmDay ddthsp Mon, YYYY') FROM employees;
+SELECT TO_CHAR(hire_date, 'fmDay, ddthsp "of" Month, YYYY') FROM employees;
+SELECT TO_CHAR(SYSDATE, 'hh:mm') FROM dual;
+SELECT TO_CHAR(SYSDATE, 'hh:mm:ss pm') FROM dual;
+
+# Number Conversion to Character Data (VARCHAR2)
+SELECT TO_CHAR(salary, '$99,999') as salary FROM employees;
+SELECT TO_CHAR(1234, '$9999.00') FROM dual;
+SELECT TO_CHAR(1234, '$9,999.00') FROM dual;
+SELECT TO_CHAR(1234, '00000') FROM dual;
+
+# Character Conversion to Number
+SELECT TO_NUMBER('1234.5', '9999.00') AS "Number" FROM dual;
+SELECT TO_NUMBER('1234.54', '9999.00') AS "Number" FROM dual;
+
+# Character Conversion to Date, fx stands for fix format
+SELECT TO_DATE('12-Nov-2006', 'dd-month-yyyy') AS "DATE" FROM dual;
+SELECT TO_DATE('2006 26 Nov', 'YYYY dd Month') AS "DATE" FROM dual;
+SELECT TO_DATE('2006 26 Nov', 'fxYYYY dd Mon') AS "DATE" FROM dual;
+SELECT TO_DATE('2006 !26,, Nov', 'fxYYYY !dd,, Mon') AS "DATE" FROM dual;
+
+# RR and YY date format
+SELECT TO_DATE('23-Nov-76', 'DD-MON-YY') AS "DATE" FROM dual;
+SELECT TO_DATE('23-Nov-76', 'DD-MON-RR') AS "DATE" FROM dual;
+SELECT TO_DATE('23-Nov-24', 'DD-MON-RR') AS "DATE" FROM dual;
