@@ -10,7 +10,7 @@ SELECT last_name, NVL(commission_pct, 0) * 250 AS "Commission" FROM employees WH
 SELECT last_name, salary, NVL2(commission_pct, salary + (salary * commission_pct), salary) AS income FROM employees WHERE department_id IN (80, 90);
 
 ### NULLIF Function
-# compare the expressions, return null if equal
+# compare the expressions, return null if equal and return first expression is not equal
 SELECT first_name, LENGTH(first_name) AS "Length FN", last_name, LENGTH(last_name) AS "Length LN", NULLIF(LENGTH(first_name), LENGTH(last_name)) FROM employees;
 
 # COALESCE Function
