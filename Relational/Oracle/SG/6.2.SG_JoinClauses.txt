@@ -1,0 +1,13 @@
+### Using Clauses
+# used to avoid error if the column table has the same name with different data type
+SELECT first_name, last_name, department_id, department_name FROM employees JOIN departments USING (department_id);
+SELECT first_name, last_name, department_id, department_name FROM employees JOIN departments USING (department_id) WHERE last_name = 'Higgins';
+
+### ON Clause
+# join table with different name
+SELECT last_name, job_title FROM employees e JOIN jobs j ON (e.job_id = j.job_id);
+SELECT last_name, job_title FROM employees e JOIN jobs j ON (e.job_id = j.job_id) WHERE last_name LIKE 'H%';
+SELECT last_name, salary, grade_level, lowest_sal, highest_sal FROM employees JOIN job_grades ON (salary BETWEEN lowest_sal AND highest_sal); # join two table without coresspoding column
+
+### Join the Three Table
+SELECT last_name, salary, grade_level, lowest_sal, highest_sal FROM employees JOIN job_grades ON (salary BETWEEN lowest_sal AND highest_sal);
