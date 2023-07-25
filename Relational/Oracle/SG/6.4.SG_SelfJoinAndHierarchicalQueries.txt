@@ -1,0 +1,7 @@
+### Self Join
+SELECT worker.last_name, worker.manager_id, manager.last_name AS "Manager Name" FROM employees worker JOIN employees manager ON(worker.manager_id = manager.employee_id);
+
+### Hierarchical Queries
+SELECT employee_id, last_name, job_id, manager_id FROM employees START WITH employee_id = 100 CONNECT BY PRIOR employee_id = manager_id;
+SELECT last_name || ' reports to ' || PRIOR last_name AS "Walk Top Down" FROM employees START WITH last_name='King' CONNECT BY PRIOR employee_id = manager_id;
+
