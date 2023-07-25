@@ -1,0 +1,10 @@
+### Natural Join
+# join table without specified column coressponding table
+SELECT first_name, last_name, job_id, job_title FROM employees NATURAL JOIN jobs;
+SELECT first_name, last_name, job_id, job_title FROM employees NATURAL JOIN jobs WHERE department_id < 80;
+SELECT department_name, city FROM departments NATURAL JOIN locations;
+
+### Cross Join
+# join table with all posibility row combination
+# example, first table has 10 rows and second table has 100 rows, then result would be 10*100 = 1000 rows
+SELECT last_name, department_name FROM employees CROSS JOIN departments;
