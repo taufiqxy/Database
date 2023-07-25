@@ -4,4 +4,11 @@ SELECT worker.last_name, worker.manager_id, manager.last_name AS "Manager Name" 
 ### Hierarchical Queries
 SELECT employee_id, last_name, job_id, manager_id FROM employees START WITH employee_id = 100 CONNECT BY PRIOR employee_id = manager_id;
 SELECT last_name || ' reports to ' || PRIOR last_name AS "Walk Top Down" FROM employees START WITH last_name='King' CONNECT BY PRIOR employee_id = manager_id;
-
+# show pseudo level
+SELECT LEVEL, last_name || ' reports to ' || PRIOR last_name AS "Walk Top Down" FROM employees START WITH last_name='King' CONNECT BY PRIOR employee_id = manager_id;
+SELECT LPAD(last_name, LENGTH(last_name)+(LEVEL*2)-2, '_') AS "Org_Chart" FROM employees START WITH last_name = 'King' CONNECT BY PRIOR employee_id = manager_id;
+# bottom up
+SELECT LPAD(last_name, LENGTH(last_name)+(LEVEL*2)-2, '_') AS "Org_Chart" FROM employees START WITH last_name = 'Grant' CONNECT BY employee_id = PRIOR manager_id;
+# hierarchical queries pruning
+SELECT last_name FROM employees WHERE last_name != 'Higgins' START WITH last_name = 'Kochhar' CONNECT BY PRIOR employee_id = manager_id;
+SELECT last_name FROM employees START WITH last_name = 'Kochhar' CONNECT BY PRIOR employee_id = manager_id AND last_name != 'Higgins';
