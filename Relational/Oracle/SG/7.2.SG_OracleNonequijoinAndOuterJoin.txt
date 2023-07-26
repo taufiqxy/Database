@@ -1,0 +1,8 @@
+### Oracle Nonequijoin
+SELECT e.last_name, e.salary, j.grade_level, j.lowest_sal, j.highest_sal FROM employees e, job_grades j WHERE (salary BETWEEN lowest_sal AND highest_sal);
+
+### oracle left outer join
+SELECT e.last_name, d.department_id, d.department_name FROM employees e, departments d WHERE e.department_id = d.department_id(+);
+
+### oracle right outer join
+SELECT e.last_name, d.department_id, d.department_name FROM employees e, departments d WHERE e.department_id(+) = d.department_id;
