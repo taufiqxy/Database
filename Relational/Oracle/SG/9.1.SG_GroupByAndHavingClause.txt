@@ -1,0 +1,13 @@
+### Group By
+SELECT department_id, avg(salary) FROM employees GROUP BY department_id ORDER BY department_id;
+SELECT department_id, count(department_id) FROM employees GROUP BY department_id;
+SELECT department_id, max(salary) FROM employees GROUP BY department_id;
+SELECT region_id, COUNT(country_name) AS "Jumlah Negara" FROM wf_countries GROUP BY region_id  ORDER BY region_id;
+SELECT region_id, COUNT(distinct(country_name)) AS "Jumlah Negara" FROM wf_countries GROUP BY region_id;
+SELECT department_id, MAX(salary) FROM employees WHERE last_name != 'King' GROUP BY department_id; # using where clause
+SELECT region_id, ROUND(AVG(population)) AS population FROM wf_countries GROUP BY region_id ORDER BY region_id;
+SELECT country_id, COUNT(language_id) AS "Number of Languanges" FROM wf_spoken_languages GROUP BY country_id;
+
+### Group within Groups
+SELECT department_id, job_id, count(*) FROM employees WHERE department_id > 40 GROUP BY department_id, job_id;
+
