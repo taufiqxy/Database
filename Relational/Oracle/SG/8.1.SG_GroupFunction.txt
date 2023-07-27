@@ -1,0 +1,36 @@
+### insight for group function
+# group functions return single value
+# group functions ignore NULL value
+# group funcions can't used in WHERE clause
+
+### Min Function
+# valid for all data type
+SELECT MIN(salary) FROM employees;
+SELECT MIN(country_name) FROM wf_countries;
+SELECT MIN(hire_date) FROM employees;
+
+### Max Function
+# valid for all data type
+SELECT MAX(salary) FROM employees;
+SELECT MAX(country_name) FROM wf_countries;
+SELECT MAX(hire_date) FROM employees;
+
+### Sum Function
+# valid for numerical data
+SELECT SUM(salary) FROM employees WHERE department_id=90;
+
+### Avg Function
+# valid for numerical data
+SELECT AVG(salary) FROM employees;
+
+### Variance Function
+# valid for numerical data
+SELECT VARIANCE(life_expect_at_birth) FROM wf_countries;
+SELECT ROUND(VARIANCE(life_expect_at_birth), 4) FROM wf_countries;
+SELECT ROUND(VARIANCE(life_expect_at_birth)) FROM wf_countries;
+
+### Stddev Function
+# valid for numerical data
+SELECT STDDEV(life_expect_at_birth) FROM wf_countries;
+SELECT ROUND(STDDEV(life_expect_at_birth), 4) FROM wf_countries;
+SELECT ROUND(STDDEV(life_expect_at_birth)) FROM wf_countries;
