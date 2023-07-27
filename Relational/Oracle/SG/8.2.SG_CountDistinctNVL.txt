@@ -1,0 +1,16 @@
+### Count Function
+SELECT COUNT(employee_id) FROM employees;
+
+### Count And NULL Value
+SELECT COUNT(commission_pct) FROM employees; # null value ignored
+SELECT COUNT(*) FROM employees; # all column counted
+
+### Distinct Function
+SELECT DISTINCT(job_id) FROM employees;
+SELECT COUNT(DISTINCT(job_id)) FROM employees;
+SELECT DISTINCT(job_id), department_id FROM employees;
+SELECT SUM(DISTINCT(salary)) FROM employees WHERE department_id = 90;
+
+### NVL Function
+# to include null value in group function
+SELECT AVG(NVL(commission_pct,0)) FROM employees;
