@@ -10,4 +10,12 @@ SELECT country_id, COUNT(language_id) AS "Number of Languanges" FROM wf_spoken_l
 
 ### Group within Groups
 SELECT department_id, job_id, count(*) FROM employees WHERE department_id > 40 GROUP BY department_id, job_id;
+SELECT department_id, job_id FROM employees GROUP BY department_id, job_id ORDER BY department_id;
 
+### Nested Function
+SELECT MAX(AVG(salary)) FROM employees GROUP BY department_id;
+
+### Having
+# having condition applied after grouping
+SELECT department_id, MAX(salary) FROM employees GROUP BY department_id HAVING COUNT(*)>1 ORDER BY department_id;
+SELECT region_id, ROUND(AVG(population)) FROM wf_countries GROUP BY region_id HAVING MIN(population)>300000 ORDER BY region_id;
