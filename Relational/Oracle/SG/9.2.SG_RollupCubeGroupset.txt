@@ -1,0 +1,13 @@
+### Rollup
+# add global total and subtotal (if it has more than one group column) in the result query
+SELECT department_id, job_id, SUM(salary) FROM employees WHERE department_id < 50 GROUP BY ROLLUP (department_id, job_id);
+
+### Cube
+# extention of rollup for cross tabulation report
+SELECT department_id, job_id, SUM(salary) FROM employees WHERE department_id < 50 GROUP BY CUBE (department_id, job_id);
+
+### grouping set
+# another extention of rollup to specify multiple grouping data
+
+### grouping function
+SELECT department_id, job_id, SUM(salary), GROUPING(department_id) AS "Dept Sub Total", GROUPING(job_id) AS "Job Sub Total" FROM employees WHERE department_id < 50 GROUP BY CUBE (department_id, job_id);
