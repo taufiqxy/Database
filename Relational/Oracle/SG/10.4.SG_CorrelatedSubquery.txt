@@ -1,0 +1,13 @@
+### Correlated Subquery to Select Employee Who Has Higher Than Average in Each Department
+# each subquery execute once, for every row of the outer query
+SELECT o.first_name, o.last_name, o.salary FROM employees o 
+WHERE salary > (SELECT AVG(i.salary) FROM employees i WHERE i.department_id = o.department_id);
+
+### Exists And Not Exists in Subquery
+# which employees are not manager
+SELECT last_name AS "Not a Manager" FROM employees emp 
+WHERE NOT EXISTS (SELECT * FROM employees mgr WHERE mgr.manager_id = emp.employee_id);
+
+### WITH Clause
+WITH managers AS (SELECT DISTINCT manager_id FROM employees WHERE manager_id IS NOT NULL)
+SELECT last_name AS "Not a Manager" FROM employees WHERE employee_id NOT IN (SELECT * FROM managers);
