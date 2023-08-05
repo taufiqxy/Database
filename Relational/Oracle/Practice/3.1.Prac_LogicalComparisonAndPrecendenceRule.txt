@@ -1,0 +1,22 @@
+### AND, OR
+SELECT code, description FROM d_themes WHERE code >200 AND description IN('Tropical', 'Football', 'Carnival');
+SELECT code, description FROM d_themes WHERE code >200 OR description IN('Tropical', 'Football', 'Carnival');
+
+### Display the last names of all Global Fast Foods employees who have “e” and “i” in their last names
+SELECT last_name FROM f_staffs WHERE last_name LIKE '%e%' AND last_name LIKE '%i%';
+
+### Global Fast Foods employees are that make more than $6.50/hour and their position is not order taker.
+SELECT * FROM f_staffs WHERE salary > 6.5 AND staff_type != 'Order Taker';
+
+### Query to display all employees whose last names start with “D” and have “a” and “e” anywhere in their last name.
+SELECT last_name FROM employees WHERE last_name LIKE 'D%' AND (last_name LIKE '%a%' OR last_name LIKE '%e%');
+
+### Venues did DJs on Demand have events that were not in private homes
+SELECT loc_type, address FROM d_venues WHERE loc_type != 'Private Home';
+
+### I was hired by Oracle after May 1998 but before June of 1999. My salary is less than $8000 per month, and I have an “en” in my last name. Who am i?
+SELECT * FROM employees WHERE (hire_date >= '01-Jun-1998' AND hire_date < '01-Jun-1999') AND (salary < 8000) AND (last_name LIKE '%en%');
+
+### Because I have been working for Oracle since the beginning of 1996, I make more than $9000 per month. Because I make so much money, I don't get a commission.
+### What's my email address?
+SELECT email FROM employees WHERE (hire_date >= '01-Jan-1996' AND hire_date <= '31-Mar-1996') AND salary > 9000 AND commission_pct IS NULL;
