@@ -1,0 +1,24 @@
+### Retrieve first name, last name, and address based the id
+SELECT first_name, last_name, address FROM f_customers WHERE id=456;
+
+### Retrieve name, start date, and end date of promotional item based condition give away name
+SELECT name, start_date, end_date FROM f_promotional_menus WHERE give_away = 'ballpen and highlighter';
+
+### SQL statement to produce specific output
+SELECT 'The 1997 recording in our database is The Celebrants Live in Concert' AS "Oldest" FROM DUAL;
+
+### correct the statement
+F = SELECT producer, title FROM d_cds WHERE title = 'carpe diem' ;
+C = SELECT producer, title FROM d_cds WHERE title = 'Carpe Diem' ;
+
+### cd that produces before 2000
+SELECT title, year FROM d_cds WHERE year < 2000;
+
+### select based salary codition
+SELECT salary FROM employees WHERE salary < = 5000;
+
+### cds that not prouduce in 2000
+SELECT title, year FROM d_cds WHERE year != 2000;
+
+### employees that was born before 1980
+SELECT * FROM f_staffs WHERE birthdate < '01-Jan-1980';
