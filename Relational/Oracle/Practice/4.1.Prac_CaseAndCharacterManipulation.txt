@@ -1,0 +1,46 @@
+#### Using the three separate words "Oracle", "Internet", and "Academy".
+SELECT CONCAT('Oracle ', CONCAT('Internet ', 'Academy')) AS "The Best Class" FROM DUAL;
+SELECT 'Oracle'|| ' Internet ' || 'Academy' AS "The Best Class" FROM DUAL;
+
+### Use the string “Oracle Internet Academy” to produce 'net'.
+SELECT SUBSTR('Oracle Internet Academy', 13, 3) AS "The Net" FROM DUAL;
+
+### What is the length of the string “Oracle Internet Academy”
+SELECT LENGTH('Oracle Internet Academy') FROM DUAL;
+
+### What’s the position of “I” in “Oracle Internet Academy”
+SELECT INSTR('Oracle Internet Academy', 'l') FROM DUAL;
+
+### Starting with the string “Oracle Internet Academy”, pad the string to create ****Oracle****Internet****Academy****
+SELECT REPLACE(RPAD(LPAD('Oracle Internet Academy', LENGTH('Oracle Internet Academy') + 4, '*'), LENGTH('Oracle Internet Academy') + 4*2, '*'), ' ','****')
+FROM DUAL;
+
+### Starting with the string “Oracle Internet Academy”, pad the string to produce: Oracle$$$Internet$$$Academy
+SELECT REPLACE('Oracle Internet Academy', ' ', '$$$$') FROM DUAL;
+
+### Using the string ‘Oracle Internet Academy’, produce the output 'Oracle 2013-2014 Academy' using the REPLACE function.
+SELECT REPLACE('Oracle Internet Academy', 'Internet', '2013-2014') AS "The Best Class" FROM DUAL;
+
+### List the order date and the order total from the Global Fast Foods F_ORDERS table.
+### Name the order total as TOTAL, and fill in the empty spaces to the left of the order total with $.
+SELECT order_date, LPAD(order_total, length(order_total) + 1, '$') AS "TOTAL" FROM f_orders;
+
+### Write a query that will output a column called “ADDRESS” which has the following information:
+### ZOE TWEE 1009 OLIVER AVENUE BOSTON, MA 12889. Use the Global Fast Foods F_CUSTOMERS table.
+SELECT first_name || ' ' || last_name || ' ' || address || ' ' || city || ', ' || state || ' ' || zip AS "ADDRESS" FROM f_customers;
+
+### Write a query to return the first character of the first name concatenated to the last_name, the salary,
+### and the department id for employees working in department 20. Give the first expression an alias of Name. Use the EMPLOYEES table.
+### Change the query to use a substitution variable instead of the hard coded value 20 for department id.
+### Run the query for department 30 and 50 without changing the original where-clause in your statement.
+SELECT SUBSTR(first_name, 1, 1) || last_name AS "Name", salary, department_id FROM employees WHERE department_id = :dpid;
+
+### Using a substitution variable for the department name, write a query listing department id,
+### department name, and location id for departments located in the_department_of_your_choice. 
+### Use the DEPARTMENTS table. Note: All substitution variables in OAE are treated as character strings, so no quotes (‘ ‘) are needed.
+SELECT department_id, department_name, location_id FROM departments WHERE department_name = :department_name;
+
+### Write a query that returns all the employee data depending on the month of their hire date. Use the EMPLOYEES table.
+### The statement should return the month part of the hiredate which is then compared to an abbreviated month (JAN, FEB, MAR)
+### passed into the query via a substitution variable.
+SELECT * FROM employees WHERE SUBSTR(hire_date, 4, 3) = :HireMonth;
