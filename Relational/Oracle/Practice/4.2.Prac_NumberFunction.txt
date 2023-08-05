@@ -1,0 +1,26 @@
+### Display Oracle database employee last_name and salary for employee_ids between 100 and 102.
+### Include a third column that divides each salary by 1.55 and rounds the result to two decimal places.
+SELECT last_name, salary, ROUND(salary/1.55, 2) FROM employees WHERE employee_id BETWEEN 100 AND 102;
+
+### Display employee last_name and salary for those employees who work in department 80.
+### Give each of them a raise of 5.333% and truncate the result to two decimal places.
+SELECT last_name, salary, TRUNC(salary + (salary * 0.05333), 2) AS "Raise" FROM employees WHERE department_id = 80;
+
+### Use a MOD number function to determine whether 38873 is an even number or an odd number.
+SELECT MOD(38873, 2) FROM DUAL;
+
+### Use the DUAL table to process the following numbers:
+### 845.553 - round to one decimal place
+### 30695.348 - round to two decimal places
+### 30695.348 - round to -2 decimal places
+### 2.3454 - truncate the 454 from the decimal place
+SELECT ROUND(845.553, 1) FROM DUAL;
+SELECT ROUND(30695.348, 2) FROM DUAL;
+SELECT ROUND(30695.348, -2) FROM DUAL;
+SELECT TRUNC(2.3454, 1) FROM DUAL;
+
+### Divide each employee’s salary by 3. Display only those employees’ last names and salaries who earn a salary that is a multiple of 3.
+SELECT last_name, salary, salary/3 FROM employees WHERE MOD(salary/3, 3) = 0;
+
+### Divide 34 by 8. Show only the remainder of the division. Name the output as EXAMPLE.
+SELECT MOD(34, 8) AS "EXAMPLE" FROM DUAL;
