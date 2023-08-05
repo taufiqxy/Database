@@ -1,0 +1,21 @@
+### display first name, last name, and salary where the salary is between 5 to 10 dollars per hour
+SELECT first_name, last_name, salary FROM f_staffs WHERE salary BETWEEN 5 AND 10;
+
+### display location type and comments where location type is private home
+SELECT loc_type, comments FROM d_venues WHERE loc_type = 'Private Home';
+
+### rewrite between operator using less than, equal, or greater than
+before = SELECT first_name, last_name FROM f_staffs WHERE salary BETWEEN 20.00 and 60.00;
+after = SELECT first_name, last_name FROM f_staffs WHERE salary >= 20.00 and salary <= 60.00;
+
+### cd title that second letter is a
+SELECT title FROM d_cds WHERE title LIKE '_a%';
+
+### DJs's Partners do not get an authorized expense amount
+SELECT first_name, last_name, auth_expense_amt FROM d_partners WHERE auth_expense_amt IS NULL;
+
+### employees with last name end with 's'
+SELECT last_name AS "Possible Candidates" FROM employees WHERE last_name LIKE '%s';
+
+### song with type code is 77, 12, 1
+SELECT * FROM d_songs WHERE type_code IN(77, 12, 1);
