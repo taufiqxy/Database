@@ -1,0 +1,15 @@
+### Assign the employee_id column the alias of “Number.” Complete the SQL statement to order the result set by the column alias.
+SELECT employee_id AS "Number", first_name, last_name FROM employees ORDER BY "Number";
+
+### Create a query that will return all the DJs on Demand CD titles ordered by year with titles in alphabetical order by year
+SELECT title FROM d_cds ORDER BY year, title;
+
+### Order the DJs on Demand songs by descending title. Use the alias “Our Collection” for the song title.
+SELECT title AS "Our Collection" FROM d_songs ORDER BY title DESC;
+
+### Write a SQL statement using the employees table and the ORDER BY clause that could retrieve the information in the following table.
+### Return only those employees with employee_id<125.
+SELECT department_id, last_name, manager_id FROM employees WHERE employee_id < 125 ORDER BY department_id DESC, last_name DESC;
+
+### Finish this query so it returns all employees whose last names start with “St”.
+SELECT last_name FROM employees WHERE last_name LIKE 'St%';
