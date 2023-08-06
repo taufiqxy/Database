@@ -1,0 +1,23 @@
+### For DJs on Demand, display the number of months between the event_date of the Vigil wedding and today’s date. Round to the nearest month.
+SELECT name, ROUND(MONTHS_BETWEEN(SYSDATE, event_date)) AS "Month Ago" FROM d_events WHERE name='Vigil wedding';
+
+### Display the days between January 1 and December 31.
+SELECT TO_DATE('31-Dec-2023') - TO_DATE('01-Jan-2023') FROM DUAL;
+
+### Using one statement, round today's date to the nearest month and nearest year, and truncate it to the nearest month and nearest year.
+SELECT ROUND(SYSDATE, 'month'), ROUND(SYSDATE, 'year'), TRUNC(SYSDATE, 'month'), TRUNC(SYSDATE, 'year') FROM DUAL;
+
+### What is the last day of the month for June 2005? Use an alias for the output.
+SELECT LAST_DAY(TO_DATE('01-Jun-2005')) FROM DUAL;
+SELECT TO_CHAR(LAST_DAY(TO_DATE('01-Jun-2005')), 'day') FROM DUAL;
+
+### Display the number of years between the Global Fast Foods employees birthday and today. Round to the nearest year
+SELECT birthdate, ROUND(MONTHS_BETWEEN(SYSDATE, birthdate)/12) AS "Years Between Birthday" FROM f_staffs;
+
+### Your next appointment with the dentist is six months from today. On what day will you go to the dentist?
+SELECT TO_CHAR(ADD_MONTHS(SYSDATE, 6), 'day') "Appointment" FROM DUAL;
+
+### The teacher said you have until the last day of this month to turn in your research paper. What day will this be?
+SELECT TO_CHAR(LAST_DAY(SYSDATE), 'day') AS "Dealine" FROM DUAL;
+
+### How many months between '17-Mei-2023' this year and January 1 next year
