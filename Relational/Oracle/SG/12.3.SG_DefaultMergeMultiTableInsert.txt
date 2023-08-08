@@ -1,0 +1,7 @@
+### default value insert
+# note: default value is specified when table created
+INSERT INTO my_employees (hire_date, first_name, last_name) VALUES (DEFAULT, 'angelina', 'Wright'); # explicit inserting default value
+INSERT INTO my_employees (fist_name, last_name) VALUES ('angelina', 'Wright'); # implicit inserting default value
+
+### default value update
+UPDATE my_employees SET hire_date = DEFAULT WHERE last_name = 'Wright';
