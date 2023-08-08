@@ -1,0 +1,28 @@
+### copy table before insert
+CREATE TABLE copy_employees AS (SELECT * FROM employees);
+CREATE TABLE copy_departments AS (SELECT * FROM departments);
+
+### insert statement
+INSERT INTO copy_departments (department_id, department_name, manager_id, location_id) VALUES (200, 'Human Resources', 205, 1500);
+
+### insert without specify column name
+INSERT INTO copy_departments VALUES (210, 'Estate Management', 102, 1700);
+
+### insert row with null value
+# use '' to insert null value
+INSERT INTO copy_employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary)
+VALUES (302, 'Grigorz', 'Polanski', 'gpolanski', '', '15-Jun-207', 'IT_PROG', 4200);
+
+### inserting special value (e.g SYSDATE, USER)
+INSERT INTO copy_employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary)
+VALUES (304, 'Test', USER, 't_user', 4159982010, SYSDATE, 'ST_CLERK', 2500);
+
+### inserting special date value
+INSERT INTO copy_employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary)
+VALUES(301, 'Katie', 'Hernandez', 'Khernandez', '8586667641', TO_DATE('July 8, 2017', 'Month fmdd, yyyy'), 'MK_REP', 4200);
+INSERT INTO copy_employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary)
+VALUES(303, 'Angelina', 'Wright', 'Awright', '4159982010', TO_DATE('July 10, 2017 17:20', 'Month fmdd, yyyy HH24:MI'), 'MK_REP', 3600);
+SELECT first_name, last_name, hire_date, TO_CHAR(hire_date, 'Month fmdd, yyyy HH24:MI') FROM copy_employees; # to show specified time
+
+### using subquery to copy rows
+INSERT INTO sales_reps(id, name, salary, commission_pct) SELECT employee_id, last_name, salary, commission_pct FROM employees WHERE job_id LIKE '%REP%';
