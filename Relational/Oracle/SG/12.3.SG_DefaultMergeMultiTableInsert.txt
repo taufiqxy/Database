@@ -5,3 +5,31 @@ INSERT INTO my_employees (fist_name, last_name) VALUES ('angelina', 'Wright'); #
 
 ### default value update
 UPDATE my_employees SET hire_date = DEFAULT WHERE last_name = 'Wright';
+
+### merge
+# update if row matching, insert if not row not matching
+MERGE INTO copy_employees c USING employees e ON (c.employee_id = e.employee_id)
+WHEN MATCHED THEN UPDATE SET c.last_name = e.last_name, c.department_id = e.department_id
+WHEN NOT MATCHED THEN INSERT VALUES (e.employee_id, e.last_name, e.department_id);
+
+### multi table insert
+INSERT ALL 
+INTO my_employees VALUES (hire_date, first_name, last_name)
+INTO copy_my_employees VALUES (hire_date, first_name, last_name)
+SELECT hire_date, first_name, last_name FROM employees;
+
+### multi table insert with condition
+INSERT ALL
+	WHEN call_ format IN ('tlk','txt','pic') THEN
+	INTO all_calls
+		VALUES (caller_id, call_timestamp, call_duration, call_format)
+	WHEN call_ format IN ('tlk','txt') THEN
+	INTO police_record_calls
+		VALUES (caller_id, call_timestamp, recipient_caller)
+	WHEN call_duration < 50 AND call_type = 'tlk' THEN
+	INTO short_calls
+		VALUES (caller_id, call_timestamp, call_duration)
+	WHEN call_duration > = 50 AND call_type = 'tlk' THEN
+	INTO long_calls
+		VALUES (caller_id, call_timestamp, call_duration)
+SELECT caller_id, call_timestamp, call_duration, call_format, recipient_caller FROM calls WHERE TRUNC(call_timestamp ) = TRUNC(SYSDATE);
