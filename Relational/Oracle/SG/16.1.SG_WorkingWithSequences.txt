@@ -1,0 +1,41 @@
+### create sequence
+CREATE SEQUENCE runner_id_seq
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 50000
+NOCACHE
+NOCYCLE;
+
+### confirm sequence
+SELECT * FROM user_sequences;
+SELECT sequence_name, min_value, max_value, increment_by, last_number FROM user_sequences;
+
+### NEXTVAL
+INSERT INTO departments (department_id, department_name, location_id) VALUES (departments_seq.NEXTVAL, 'Support', 2500);
+
+### create table runner
+CREATE TABLE runners 
+(runner_id NUMBER(6,0) CONSTRAINT runners_id_pk PRIMARY KEY,
+first_name VARCHAR2(30),
+last_name VARCHAR2(30)
+);
+
+### insert into runners table
+INSERT INTO runners (runner_id, first_name, last_name) VALUES (runner_id_seq.NEXTVAL, 'Joanne', 'Everely');
+INSERT INTO runners (runner_id, first_name, last_name) VALUES (runner_id_seq.NEXTVAL, 'Adam', 'Curtis');
+INSERT INTO runners (runner_id, first_name, last_name) VALUES (runner_id_seq.NEXTVAL, 'Lewis', 'MacClan');
+
+### CURRVAL and NEXTVAL
+# following syntax will increase/decrease sequence even though sequence not used by table
+SELECT runner_id_seq.CURRVAL FROM DUAL;
+SELECT runner_id_seq.NEXTVAL FROM DUAL;
+
+### modifiying a sequence
+ALTER SEQUENCE runner_id_seq
+INCREMENT BY 1
+MAXVALUE 999999
+NOCACHE
+NOCYCLE;
+
+### remove sequence
+DROP SEQUENCE runner_id_seq;
