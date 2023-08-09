@@ -1,0 +1,28 @@
+### create index
+CREATE INDEX wf_cont_reg_id_idx ON wf_countries(region_id);
+
+### composite index
+CREATE INDEX emps_name_idx ON employees (first_name, last_name);
+
+### confirming index
+SELECT DISTINCT ic.index_name, ic.column_name, ic.column_position, id.uniqueness
+FROM user_indexes id, user_ind_columns ic
+WHERE id.table_name = ic.table_name AND ic.table_name = 'EMPLOYEES';
+
+### fucntion-base index
+CREATE INDEX upper_last_name_idx ON employees (UPPER(last_name));
+SELECT * FROM employees WHERE UPPER(last_name) = 'KING';
+SELECT * FROM employees WHERE UPPER(last_name) LIKE 'KIN%';
+
+### fucntion-base index on to_char function
+CREATE INDEX emp_hire_year_idx ON employees (TO_CHAR(hire_date, 'YYYY'));
+SELECT first_name, last_name, hire_date FROM employees WHERE TO_CHAR(hire_date, 'YYYY') = '1987';
+
+### remove index
+DROP INDEX upper_last_name_idx;
+
+### synonym
+CREATE SYNONYM amy_emps FOR amy_copy_employees;
+
+### drop synonym
+DROP SYNONYM amy_emps;
