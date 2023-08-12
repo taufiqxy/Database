@@ -1,0 +1,26 @@
+### system privileges
+### crate a user
+CREATE USER scoot IDENTIFIED BY ur35scott;
+
+### change user password
+ALTER USER scoot IDENTIFIED BY imscott35;
+
+### grant a privileges to a user
+GRANT create session, create table, create sequence, create view TO scoot;
+
+### object privileges
+### grant update salary to a user
+GRANT UPDATE (salary) ON employees TO scoot;
+
+### grant to public (all users)
+GRANT select ON sys.employees TO PUBLIC;
+
+### viewing privileges for a user
+SELECT * FROM role_sys_privs;
+SELECT * FROM role_tab_privs;
+SELECT * FROM user_role_privs;
+SELECT * FROM user_tab_privs_made;
+SELECT * FROM user_tab_privs_recd;
+SELECT * FROM user_col_privs_made;
+SELECT * FROM user_col_privs_recd;
+SELECT * FROM user_sys_privs;
