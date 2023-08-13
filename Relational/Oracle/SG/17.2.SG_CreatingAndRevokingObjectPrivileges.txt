@@ -1,0 +1,26 @@
+### roles
+### create a role
+CREATE ROLE manager;
+
+### grant privileges to a role
+GRANT create table, create view TO manager;
+
+### grant a role to a user
+GRANT manager TO scoot;
+
+### object grant
+### grant select, note: select cannot granted to only a specific or few columns. instead of it, view is used.
+GRANT select ON employees TO public;
+
+### grant update
+GRANT UPDATE(name, address) ON dummy TO public;
+GRANT UPDATE(name, address) ON dummy TO manager, scoot;
+
+### create synonym for other user table
+CREATE SYNONYM dummy FOR sys.dummy;
+
+### WITH GRANT option, allow given priviledge user to grant to other users
+GRANT select, insert ON dummy TO scoot WITH GRANT OPTION;
+
+### revoke object privileges
+REVOKE select, insert ON dummy FROM scoot;
