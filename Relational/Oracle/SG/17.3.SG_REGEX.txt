@@ -1,0 +1,19 @@
+### REGEXP_LIKE
+SELECT first_name, last_name FROM employees WHERE REGEXP_LIKE(first_name, '^Ste(v|ph)en$');
+
+### REGEXP_REPLACE
+SELECT last_name, REGEXP_REPLACE(last_name, '^H(a|e|i|o|u)', '**') FROM employees;
+
+### REGEXP_COUNT
+SELECT country_name, REGEXP_COUNT(country_name, '(an)') AS "count of 'an'"
+FROM wf_countries WHERE REGEXP_COUNT(country_name, '(an)') > 1;
+
+### REGEX in check constraint
+# make sure email include '@'
+ALTER TABLE employees ADD CONSTRAINT email_addr_chk CHECK(REGEX_LIKE(email, '@'));
+# check constraint while creating a table
+CREATE TABLE my_contacts 
+(first_name VARCHAR2(15),
+last_name VARCHAR2(15),
+email VARCHAR2(30) CHECK(REGEXP_LIKE(email, '.+@.+\..+'))
+);
