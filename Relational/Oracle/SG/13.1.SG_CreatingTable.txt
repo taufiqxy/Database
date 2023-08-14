@@ -1,0 +1,17 @@
+### create a table
+CREATE TABLE my_cd_collection
+(cd_number NUMBER(3),
+title VARCHAR2(20),
+artist VARCHAR2(20),
+purchase_date DATE DEFAULT SYSDATE
+);
+
+### other example of creating table
+CREATE TABLE my_friends
+(first_name VARCHAR2(20),
+last_name VARCHAR2(30),
+email VARCHAR2(30),
+phone_num VARCHAR2(12),
+birth_date DATE
+);
+
