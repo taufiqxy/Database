@@ -1,0 +1,28 @@
+### DATA-TIME data type
+CREATE TABLE time_ex1 (exact_time TIMESTAMP);
+INSERT INTO time_ex1 values ('19-Jan-2023 08:54:44.123456');
+INSERT INTO time_ex1 values (SYSDATE);
+INSERT INTO time_ex1 values (SYSTIMESTAMP);
+SELECT * FROM time_ex1;
+
+### timestamps with local time zone
+CREATE TABLE time_ex2 (time_with_offset TIMESTAMP WITH TIME ZONE);
+INSERT INTO time_ex2 VALUES (SYSTIMESTAMP);
+INSERT INTO time_ex2 VALUES ('25-Jan-2023 10:44:34.123456 AM +2:00');
+SELECT * FROM time_ex2;
+
+### timestamps with time zone
+CREATE TABLE time_ex3 (first_column TIMESTAMP WITH TIME ZONE, second_column TIMESTAMP WITH LOCAL TIME ZONE);
+INSERT INTO time_ex3 VALUES ('14-May-2023 07:03:44 AM -07:00', '09-Apr-2023 04:17:28');
+SELECT * FROM time_ex3;
+
+### INTERVAL YEAR TO MONTH
+CREATE TABLE time_ex4 (loan_duration1 INTERVAL YEAR(3) TO MONTH, loan_duration2 INTERVAL YEAR(2) TO MONTH);
+INSERT INTO time_ex4 VALUES (INTERVAL '120' MONTH(3), INTERVAL '3-6' YEAR TO MONTH);
+SELECT SYSDATE + loan_duration1 AS "120 months from now", SYSDATE + loan_duration2 AS "3 years 6 months from now" FROM time_ex4;
+
+### INTERVAL DAY TO SECOND
+CREATE TABLE time_ex5 (day_duration1 INTERVAL DAY(3) TO SECOND, day_duration2 INTERVAL DAY(3) TO SECOND);
+INSERT INTO time_ex5 VALUES (INTERVAL '25' DAY(2), INTERVAL '4 10:30:10' DAY TO SECOND);
+SELECT SYSDATE + day_duration1 AS "25 from now", TO_CHAR(SYSDATE + day_duration2, 'dd-Mon-yyyy hh:mi:ss') AS "precise days and time from now"
+FROM time_ex5; 
