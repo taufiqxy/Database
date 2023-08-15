@@ -1,1 +1,5 @@
 ### add column
+ALTER TABLE my_cd_collection ADD (release_date DATE DEFAULT SYSDATE);
+ALTER TABLE my_friends ADD (favorite_game VARCHAR2(30));
+
+### modifiying column
