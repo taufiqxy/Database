@@ -3,3 +3,75 @@ ALTER TABLE my_cd_collection ADD (release_date DATE DEFAULT SYSDATE);
 ALTER TABLE my_friends ADD (favorite_game VARCHAR2(30));
 
 ### modifiying column
+CREATE TABLE mod_emp (last_name VARCHAR2(20), salary NUMBER(8,2));
+ALTER TABLE mod_emp MODIFY (last_name VARCHAR(30));
+ALTER TABLE mod_emp MODIFY (last_name VARCHAR(10));
+ALTER TABLE mod_emp MODIFY (salary NUMBER(10,2));
+ALTER TABLE mod_emp MODIFY (salary NUMBER(8,2) DEFAULT 50);
+
+### drop column
+ALTER TABLE my_cd_collection DROP COLUMN release_date;
+
+### set unused, instead of dropping column to make it quicker drop. (for case a column too big).
+ALTER TABLE copy_employees SET UNUSED (email);
+ALTER TABLE copy_employees DROP UNUSED COLUMNS;
+
+### drop table
+ALTER SESSION SET RECYCLEBIN = ON; # activated recycle bin
+DROP TABLE copy_employees;
+SELECT original_name, operation, droptime FROM user_recyclebin; # view recycle bin
+FLASHBACK TABLE copy_employees TO BEFORE DROP; # bring back table from recycle bin
+
+### purge recycle bin
+DROP TABLE copy_employees PURGE;
+
+### rename table
+RENAME my_cd_collection TO my_music;
+
+### truncate table
+TRUNCATE copy_employees;
+
+### comment on table
+COMMENT ON TABLE employees IS 'Western Region Only';
+SELECT table_name, comments FROM user_tab_comments;
+COMMENT ON TABLE employees IS ''; # drop comment
+
+### flashback queries, track change
+SELECT employee_id,first_name ||' '|| last_name AS "NAME",
+versions_operation AS "OPERATION",
+versions_starttime AS "START_DATE",
+versions_endtime AS "END_DATE", salary
+FROM employees
+VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
+WHERE employee_id = 1;
+
+INSERT INTO copy_employees VALUES
+(1, 'Natacha', 'Hansen', 'NHANSEN', '4412312341234', '07-Sep-1998', 'AD_VP', 12000, null, 100, 90, NULL);
+
+SELECT employee_id,first_name ||' '|| last_name AS "NAME",
+versions_operation AS "OPERATION",
+versions_starttime AS "START_DATE",
+versions_endtime AS "END_DATE", salary
+FROM copy_employees
+VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
+WHERE employee_id = 1;
+
+UPDATE copy_employees SET salary = 1 WHERE employee_id = 1;
+
+SELECT employee_id,first_name ||' '|| last_name AS "NAME",
+versions_operation AS "OPERATION",
+versions_starttime AS "START_DATE",
+versions_endtime AS "END_DATE", salary
+FROM copy_employees
+VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
+WHERE employee_id = 1;
+
+DELETE from copy_employees WHERE employee_id = 1;
+
+SELECT employee_id,first_name ||' '|| last_name AS "NAME",
+versions_operation AS "OPERATION",
+versions_starttime AS "START_DATE",
+versions_endtime AS "END_DATE", salary
+FROM copy_employees
+VERSIONS BETWEEN SCN MINVALUE AND MAXVALUE
+WHERE employee_id = 1;
