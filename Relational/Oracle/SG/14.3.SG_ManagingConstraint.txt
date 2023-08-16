@@ -1,0 +1,9 @@
+### add constraint using alter
+ALTER TABLE copy_employees ADD CONSTRAINT copy_employees_employee_id_pk PRIMARY KEY (employee_id);
+ALTER TABLE copy_employees MODIFY (email CONSTRAINT copy_employees_email_nn NOT NULL); # just for not null constraint
+
+### dropping constraint
+ALTER TABLE copy_employees DROP CONSTRAINT copy_employees_employee_id_pk;
+ALTER TABLE copy_employees DROP CONSTRAINT copy_employees_employee_id_pk CASCADE;
+
+### disabling constraint
