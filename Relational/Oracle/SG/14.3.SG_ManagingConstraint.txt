@@ -7,3 +7,24 @@ ALTER TABLE copy_employees DROP CONSTRAINT copy_employees_employee_id_pk;
 ALTER TABLE copy_employees DROP CONSTRAINT copy_employees_employee_id_pk CASCADE;
 
 ### disabling constraint
+ALTER TABLE my_friends DISABLE CONSTRAINT my_friends_friend_id_pk;
+ALTER TABLE my_friends DISABLE CONSTRAINT my_friends_friend_id_pk CASCADE;
+
+CREATE TABLE my_friends(
+    friend_id VARCHAR(10) CONSTRAINT my_friends_friend_id_pk PRIMARY KEY DISABLE,
+    first_name VARCHAR2(20),
+    last_name VARCHAR2(30),
+    email VARCHAR2(30),
+    phone_num VARCHAR2(12),
+    birth_date DATE
+);
+
+### enabling constraint
+ALTER TABLE my_friends ENABLE CONSTRAINT my_friends_friend_id_pk;
+
+### cascading constraint
+ALTER TABLE copy_employees DROP (email) CASCADE CONSTRAINT;
+
+### viewing constraint
+SELECT constraint_name, table_name, constraint_type, status
+FROM user_constraints WHERE table_name = 'COPY_EMPLOYEES';
