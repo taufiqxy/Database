@@ -1,0 +1,16 @@
+### constraint at the column level
+CREATE TABLE clients (
+    client_number NUMBER(4) CONSTRAINT clients_client_number_pk PRIMARY KEY,
+    last_name VARCHAR2(14) CONSTRAINT clients_last_name_nn NOT NULL,
+    email VARCHAR2(80) CONSTRAINT clients_email_uq UNIQUE
+);
+
+### constraint at the table level
+CREATE TABLE clients (
+    client_number NUMBER(6) NOT NULL,
+    first_name VARCHAR2(20) ,
+    last_name VARCHAR2(20) ,
+    email VARCHAR2(20) ,
+    phone VARCHAR2(10) NOT NULL,
+    CONSTRAINT client_phone_email_uq UNIQUE (email, phone)
+);
