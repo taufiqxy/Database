@@ -1,0 +1,65 @@
+### primary key
+CREATE TABLE clients (
+    client_number NUMBER(4),
+    fist_name VARCHAR2(14),
+    last_name VARCHAR2(13),
+    CONSTRAINT clients_client_number_pk PRIMARY KEY (client_number)
+);
+
+### composite primary key
+CREATE TABLE copy_job_history (
+    employee_id NUMBER(6,0),
+    start_date DATE,
+    job_id VARCHAR2(10),
+    department_id NUMBER(4,0),
+    CONSTRAINT copy_jhist_id_st_date_pk PRIMARY KEY (employee_id, start_date)
+);
+
+### foreign key (column level)
+CREATE TABLE copy_employees (
+    employee_id NUMBER(6, 0) CONSTRAINT copy_employees_employee_id_pk PRIMARY KEY,
+    fist_name VARCHAR2(20),
+    last_name VARCHAR2(25),
+    department_id NUMBER(4, 0) CONSTRAINT copy_employees_depatment_id_fk REFERENCES departments(department_id),
+    email VARCHAR2(25)
+);
+
+### foreign key (table level)
+CREATE TABLE copy_employees (
+    employee_id NUMBER(6, 0) CONSTRAINT copy_employees_employee_id_pk PRIMARY KEY,
+    fist_name VARCHAR2(20),
+    last_name VARCHAR2(25),
+    department_id NUMBER(4, 0),
+    email VARCHAR2(25),
+    CONSTRAINT copy_employees_depatment_id_fk FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+
+### on delete cascade
+CREATE TABLE copy_employees (
+    employee_id NUMBER(6, 0) CONSTRAINT copy_employees_employee_id_pk PRIMARY KEY,
+    fist_name VARCHAR2(20),
+    last_name VARCHAR2(25),
+    department_id NUMBER(4, 0),
+    email VARCHAR2(25),
+    CONSTRAINT copy_employees_depatment_id_fk FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE CASCADE
+);
+
+CREATE TABLE copy_employees (
+    employee_id NUMBER(6, 0) CONSTRAINT copy_employees_employee_id_pk PRIMARY KEY,
+    fist_name VARCHAR2(20),
+    last_name VARCHAR2(25),
+    department_id NUMBER(4, 0),
+    email VARCHAR2(25),
+    CONSTRAINT copy_employees_depatment_id_fk FOREIGN KEY (department_id) REFERENCES departments(department_id) ON DELETE SET NULL
+);
+
+### CHECK constraint
+CREATE TABLE copy_job_history (
+    employee_id NUMBER(6,0),
+    start_date DATE,
+    end_date DATE,
+    job_id VARCHAR2(10),
+    department_id NUMBER(4,0),
+    CONSTRAINT copy_jhist_id_st_date_pk PRIMARY KEY (employee_id, start_date),
+    CONSTRAINT copy_jhist_start_end_date_ck CHECK (start_date < end_date) # ensure that start date predates than end date
+);
