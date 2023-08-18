@@ -1,0 +1,25 @@
+### view without check constraint
+CREATE VIEW view_dept50
+AS SELECT department_id, employee_id, first_name, last_name, salary
+FROM copy_employees
+WHERE department_id = 50;
+
+UPDATE view_dept50 SET department_id = 90 WHERE employee_id = 124; # still succeed, even though id 124 does not exist.
+
+### view with check constraint
+CREATE OR REPLACE VIEW view_dept50
+AS SELECT department_id, employee_id, first_name, last_name, salary
+FROM employees
+WHERE department_id = 50
+WITH CHECK OPTION CONSTRAINT view_dept50_check;
+
+UPDATE view_dept50 SET department_id = 90 WHERE employee_id = 124; # will caused error if id 124 does not exist.
+
+### view with read only, no DML operation will allowed in the view
+CREATE OR REPLACE VIEW view_dept50
+AS SELECT department_id, employee_id, first_name, last_name, salary
+FROM employees
+WHERE department_id = 50
+WITH READ ONLY;
+
+### note: DML operation not allowed in the complex view.
