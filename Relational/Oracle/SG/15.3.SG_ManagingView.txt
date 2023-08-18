@@ -1,0 +1,15 @@
+### deleting view
+DROP VIEW view_employees;
+
+### inline view
+SELECT e.last_name, e.salary, e.department_id, d.maxsal
+FROM employees e, (SELECT department_id, max(salary) maxsal FROM employees GROUP BY department_id) d
+WHERE e.department_id = d.department_id AND e.salary = d.maxsal;
+
+### top-n-analysis (used to rank results)
+SELECT ROWNUM AS "Longest employed", last_name, hire_date FROM employees
+WHERE ROWNUM <=5 ORDER BY hire_date;
+
+SELECT ROWNUM AS "Longest employed", last_name, hire_date
+FROM (SELECT last_name, hire_date FROM employees ORDER BY hire_date)
+WHERE ROWNUM <=5;
